@@ -1,6 +1,8 @@
+const CORS_URL = 'https://cors-anywhere.herokuapp.com';
+
 // System Info
 const fetchSystemInfo = () => {
-  fetch('http://70.122.27.220:8170/ctx/api/ctxGetSystemInfo.php')
+  fetch(`${CORS_URL}/http://70.122.27.220:8170/ctx/api/ctxGetSystemInfo.php`)
     .then(res => res.json())
     .then(json => {
       const data = json.data[0];
@@ -30,7 +32,7 @@ const generateResidentTabs = (size) => {
 
 // Residents
 const fetchResidentData = (card) => {
-  fetch(`http://70.122.27.220:8170/ctx/api/ctxGetPortsInfoCard_A.php?card=${card}`)
+  fetch(`${CORS_URL}/http://70.122.27.220:8170/ctx/api/ctxGetPortsInfoCard_A.php?card=${card}`)
     .then(res => res.json())
     .then(json => {
       const data = json.data;
@@ -72,7 +74,7 @@ const residentTabClickHandler = () => {
 
 // System Status
 const fetchSystemStatus = () => {
-  fetch('http://70.122.27.220:8170/ctx/api/ctxGetSystemStatus.php')
+  fetch(`${CORS_URL}/http://70.122.27.220:8170/ctx/api/ctxGetSystemStatus.php`)
     .then(res => res.json())
     .then(json => {
       const data = json.data[0];
