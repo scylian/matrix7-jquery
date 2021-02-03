@@ -1,0 +1,15 @@
+nav a.sidenav-trigger {
+  display: block;
+}
+
+.inline a {
+  display: inline;
+}
+
+nav ul a.status-btn {
+  margin-left: 0;
+}
+
+.nav-titles li {
+  margin-right: 15px;
+}
