@@ -1,8 +1,9 @@
-const CORS_URL = 'https://cors-anywhere.herokuapp.com';
+const CORS_URL = 'https://cors-anywhere.herokuapp.com/';
+// const CORS_URL = '';
 
 // System Info
 const fetchSystemInfo = () => {
-  fetch(`${CORS_URL}/http://70.122.27.220:8170/ctx/api/ctxGetSystemInfo.php`)
+  fetch(`${CORS_URL}http://70.122.27.220:8170/ctx/api/ctxGetSystemInfo.php`)
     .then(res => res.json())
     .then(json => {
       const data = json.data[0];
@@ -32,7 +33,7 @@ const generateResidentTabs = (size) => {
 
 // Residents
 const fetchResidentData = (card) => {
-  fetch(`${CORS_URL}/http://70.122.27.220:8170/ctx/api/ctxGetPortsInfoCard_A.php?card=${card}`)
+  fetch(`${CORS_URL}http://70.122.27.220:8170/ctx/api/ctxGetPortsInfoCard_A.php?card=${card}`)
     .then(res => res.json())
     .then(json => {
       const data = json.data;
@@ -44,10 +45,25 @@ const generateResidentCards = (data) => {
   let html = '';
 
   data.forEach(resident => {
+    let color = 'blue-grey darken-1';
+
+    switch(resident.rstat) {
+      case "CONN":
+        color = 'blue lighten-4';
+        break;
+      case "SF":
+        color = 'grey lighten-5';
+        break;
+      case "MAINT":
+        color = 'orange lighten-1';
+        break;
+      default:
+    }
+    
     html += `
       <div class="col m4 l3 xl2">
-        <div class="card blue-grey darken-1">
-          <div class="card-content white-text">
+        <div class="card ${color}">
+          <div class="card-content">
             <span class="card-title">${resident.rname}</span>
             <p>Status: ${resident.rstat}</p>
             <p>${resident.pname}</p>
@@ -74,7 +90,7 @@ const residentTabClickHandler = () => {
 
 // System Status
 const fetchSystemStatus = () => {
-  fetch(`${CORS_URL}/http://70.122.27.220:8170/ctx/api/ctxGetSystemStatus.php`)
+  fetch(`${CORS_URL}http://70.122.27.220:8170/ctx/api/ctxGetSystemStatus.php`)
     .then(res => res.json())
     .then(json => {
       const data = json.data[0];
