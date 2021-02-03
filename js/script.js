@@ -1,5 +1,3 @@
-const BASE_URL = 'http://70.122.27.220:8170/ctx/api';
-
 // System Info
 const fetchSystemInfo = () => {
   fetch(`${BASE_URL}/ctxGetSystemInfo.php`)
