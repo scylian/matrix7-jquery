@@ -102,6 +102,6 @@ $(document).ready(() => {
   $('.sidenav').sidenav();
   fetchSystemInfo();
   fetchSystemStatus();
-  setInterval(fetchSystemStatus, 15000);
+  setInterval(fetchSystemStatus, 60000);
   residentTabClickHandler();
 });
