@@ -20,6 +20,7 @@
   <!-- CSS
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <link rel="stylesheet" href="css/materialize.min.css">
+  <link rel="stylesheet" href="css/mstepper.min.css">
   <link rel="stylesheet" href="css/style.css">
 
   <!-- JS
@@ -28,6 +29,7 @@
   <script type="text/javascript" src="js/moment.min.js"></script>
   <script type="text/javascript" src="js/moment-timezone.min.js"></script>
   <script type="text/javascript" src="js/materialize.min.js"></script>
+  <script type="text/javascript" src="js/mstepper.min.js"></script>
 
   <!-- Favicon
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
@@ -38,7 +40,7 @@
 
   <!-- Navbar
   –––––––––––––––––––––––––––––––––––––––––––––––––– --> 
-  <nav>
+  <nav class="blue darken-3">
     <div class="nav-wrapper row">
       <div class="col s12">
         <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
@@ -47,18 +49,7 @@
           <li>SW Version V 0.1</li>
           <li>CTX-48</li>
         </ul>
-        <ul id="nav-mobile" class="right">
-          <li>
-            ALARM :
-            <a class="green white-text btn-flat btn-small status-btn">NONE</a>
-          </li>
-          <li>
-            STATUS :
-            <a class="green white-text btn-flat btn-small status-btn">ON</a>
-          </li>
-          <li id="currTime">
-            TIME: <span></span>
-          </li>
+        <ul id="header-status" class="right">
         </ul>
       </div>
     </div>

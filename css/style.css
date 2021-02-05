@@ -13,3 +13,7 @@ nav ul a.status-btn {
 .nav-titles li {
   margin-right: 15px;
 }
+
+.resident-card {
+  cursor: pointer;
+}
