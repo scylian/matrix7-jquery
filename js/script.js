@@ -66,17 +66,16 @@ const generateResidentCards = (data) => {
     }
     
     html += `
-      <div class="col m4 l3 xl2">
-        <a class="modal-trigger black-text" href="#modal">
-          <div class="resident-card card ${color}">
+      <div class="col m4 l3 xl2 black-text">
+        <div class="resident-card card ${color}">
           <div class="card-content">
-          <span class="card-title">${resident.rname}</span>
-          <p>Status: ${resident.rstat}</p>
-          <p>${resident.pname}</p>
-          <p>${resident.pname !== 'NO SERVICE' ? resident.svc : '-'}</p>
+            <span class="card-title">${resident.rname}</span>
+            <input class="resident-rport" value="${resident.rport}" style="display:none;" />
+            <p>Status: <span class="resident-rstat">${resident.rstat}</span></p>
+            <p>${resident.pname}</p>
+            <p>${resident.pname !== 'NO SERVICE' ? resident.svc : '-'}</p>
           </div>
-          </div>
-        </a>
+        </div>
       </div>
     `
 
@@ -160,15 +159,186 @@ const generateStatusBtn = (stat) => {
 
 const residentCardClickHandler = () => {
   $('#resident-cards').on('click', '.resident-card', function() {
-    console.log('click');
+    const residentName = $(this).find('.card-title').text();
+    const residentRport = $(this).find('.resident-rport').val();
+    const residentStatus = $(this).find('.resident-rstat').text();
+    generateModalHtml(residentStatus);
+
+    $('#modal-header').text(residentName);
+    $('#modal-rport').val(residentRport);
+    $('.modal').modal('open');
   });
 }
 
-const stepperInitialize = () => {
-  $('.stepper .step').first().addClass('active');
-  const stepper = document.querySelector('.stepper');
-  const stepperInstance = new MStepper(stepper, {
-    firstActive: 0
+const generateModalHtml = (rstat) => {
+  let connectText = '';
+  let radio2Value = '';
+  if (rstat === 'SF') {
+    connectText = 'connect';
+    radio2Value = 'connect';
+  } else if (rstat === 'CONN') {
+    connectText = 'disconnect';
+    radio2Value = 'disconnect';
+  }
+  
+  const html = `
+    <form action="#">
+      <p>
+        <label>
+          <input name="modal-radio" type="radio" value="view" checked />
+          <span>view the details of resident-port</span>
+        </label>
+      </p>
+      <p>
+        <label>
+          <input name="modal-radio" type="radio" value="${radio2Value}" />
+          <span>${connectText} the resident to a service-provider</span>
+        </label>
+      </p>
+    </form>
+  `
+  $('#modal-body').html(html);
+}
+
+const generateDisconnectModalHtml = () => {
+  const html = `
+    <form action="#">
+      <p>
+        <label>
+          <input name="modal-radio" type="radio" value="disconnect" checked />
+          <span>disconnect from current provider</span>
+        </label>
+      </p>
+      <p>
+        <label>
+          <input name="modal-radio" type="radio" value="none" />
+          <span>none</span>
+        </label>
+      </p>
+    </form>
+  `
+  $('#modal-body').html(html);
+}
+
+const providerCOptions = (providers) => {
+  let html = '';
+
+  providers.map(provider => {
+    console.log(provider);
+    html += `
+      <p>
+        <label>
+          <input name="modal-radio" type="radio" value="${provider}" />
+          <span>Connect to ${provider.toUpperCase()}</span>
+        </label>
+      </p>
+    `;
+  });
+
+  return html;
+}
+
+const generateConnectModalHtml = (data) => {
+  const providerB = data.provider_B;
+  const providerC = data.provider_C;
+  
+  const html = `
+    <form action="#">
+      <p>
+        <label>
+          <input name="modal-radio" type="radio" value="${providerB}" checked />
+          <span>Connect to ${providerB.toUpperCase()}</span>
+        </label>
+      </p>
+      ${providerCOptions(providerC)}
+    </form>
+  `
+  $('#modal-body').html(html);
+}
+
+const showResidentInfo = (data) => {
+  const modalBody = $('#modal-body');
+  let html = '';
+
+  for (const [key, value] of Object.entries(data)) {
+    html += `
+      <p>
+        ${key} : ${value}
+      </p>
+    `;
+  }
+
+  modalBody.html(html);
+}
+
+const fetchResidentInfo = (rport) => {
+  fetch(`${BASE_URL}/ctxGetPortDetail.php?port=${rport}`)
+    .then(res => res.json())
+    .then(json => {
+      if (json.rslt === 'fail') {
+        alert(json.reason);
+      } else {
+        const data = json.data[0];
+        showResidentInfo(data);
+      }
+    });
+}
+
+const fetchAvailableProviders = (rport) => {
+  fetch(`${BASE_URL}/ctxGetAvailProviders.php?port=${rport}`)
+    .then(res => res.json())
+    .then(json => {
+      if (json.rslt === 'fail') {
+        alert(json.reason);
+      } else {
+        const data = json.data[0];
+        generateConnectModalHtml(data);
+      }
+    });
+}
+
+const connectProviderB = (provider, rport) => {
+  fetch(`${BASE_URL}/ctxConnectProvider_B.php?port=${rport}&provider=${provider.toUpperCase()}`)
+    .then(res => res.json())
+    .then(json => {
+      if (json.rslt === 'fail') {
+        alert(json.reason);
+      } else {
+        const data = json.data[0];
+        console.log(data);
+      }
+    });
+}
+
+const connectProviderC = (provider, rport) => {
+  fetch(`${BASE_URL}/ctxConnectProvider_C.php?port=${rport}&provider=${provider.toUpperCase()}`)
+    .then(res => res.json())
+    .then(json => {
+      if (json.rslt === 'fail') {
+        alert(json.reason);
+      } else {
+        const data = json.data[0];
+        console.log(data);
+      }
+    });
+}
+
+const modalNextClickHandler = () => {
+  $('#modal-next').on('click', function() {
+    const modalOption = $('input[name="modal-radio"]:checked').val();
+    const rport = $('#modal-rport').val();
+
+    if (modalOption === 'view') {
+      fetchResidentInfo(rport);
+    } else if (modalOption === 'disconnect') {
+      generateDisconnectModalHtml();
+    } else if (modalOption === 'connect') {
+      fetchAvailableProviders(rport);
+    } else if (modalOption === 'Verizon') {
+      connectProviderB(modalOption, rport);
+    } else {
+      connectProviderC(modalOption, rport);
+    }
   });
 }
 
@@ -179,6 +349,6 @@ $(document).ready(() => {
   setInterval(fetchSystemStatus, 60000);
   residentTabClickHandler();
   residentCardClickHandler();
+  modalNextClickHandler();
   $('.modal').modal();
-  stepperInitialize();
 });

@@ -15,12 +15,11 @@
 
   <!-- FONTS
   -------------------------------------------------- -->
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
   
   <!-- CSS
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <link rel="stylesheet" href="css/materialize.min.css">
-  <link rel="stylesheet" href="css/mstepper.min.css">
   <link rel="stylesheet" href="css/style.css">
 
   <!-- JS
@@ -29,7 +28,6 @@
   <script type="text/javascript" src="js/moment.min.js"></script>
   <script type="text/javascript" src="js/moment-timezone.min.js"></script>
   <script type="text/javascript" src="js/materialize.min.js"></script>
-  <script type="text/javascript" src="js/mstepper.min.js"></script>
 
   <!-- Favicon
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
@@ -83,56 +81,13 @@
   -------------------------------------------------- -->
   <div id="modal" class="modal">
     <div class="modal-content">
-      <h4>Modal Header</h4>
-      <ul class="stepper linear">
-        <li class="step">
-          <div class="step-title waves-effect">E-mail</div>
-          <div class="step-content">
-            <!-- Your step content goes here (like inputs or so) -->
-            <input id="email" name="email" type="email" class="validate" required />
-            <div class="step-actions">
-                <!-- Here goes your actions buttons -->
-                <button class="waves-effect waves-dark btn next-step">CONTINUE</button>
-            </div>
-          </div>
-        </li>
-        <li class="step">
-          <div class="step-title waves-effect">E-mail</div>
-          <div class="step-content">
-            <!-- Your step content goes here (like inputs or so) -->
-            <input id="email" name="email" type="email" class="validate" required />
-            <div class="step-actions">
-                <!-- Here goes your actions buttons -->
-                <button class="waves-effect waves-dark btn next-step">CONTINUE</button>
-            </div>
-          </div>
-        </li>
-        <li class="step">
-          <div class="step-title waves-effect">E-mail</div>
-          <div class="step-content">
-            <!-- Your step content goes here (like inputs or so) -->
-            <input id="email" name="email" type="email" class="validate" required />
-            <div class="step-actions">
-                <!-- Here goes your actions buttons -->
-                <button class="waves-effect waves-dark btn next-step">CONTINUE</button>
-            </div>
-          </div>
-        </li>
-        <li class="step">
-          <div class="step-title waves-effect">E-mail</div>
-          <div class="step-content">
-            <!-- Your step content goes here (like inputs or so) -->
-            <input id="email" name="email" type="email" class="validate" required />
-            <div class="step-actions">
-                <!-- Here goes your actions buttons -->
-                <button class="waves-effect waves-dark btn next-step">CONTINUE</button>
-            </div>
-          </div>
-        </li>
-      </ul>
+      <h4 id="modal-header"></h4>
+      <div id="modal-body"></div>
+      <input id="modal-rport" style="display:none"/>
     </div>
     <div class="modal-footer">
-      <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+      <a href="#!" class="modal-close waves-effect waves-green btn-small">Close</a>
+      <button id="modal-next" class="waves-effect light-blue darken-1 btn-small">Next</button>
     </div>
   </div>
 
