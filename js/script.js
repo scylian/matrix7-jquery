@@ -1,3 +1,17 @@
+const ModalSpinnerBlueSm = `
+  <div id="modal-preloader" class="preloader-wrapper active small">
+    <div class="spinner-layer spinner-blue-only">
+      <div class="circle-clipper left">
+        <div class="circle"></div>
+      </div><div class="gap-patch">
+        <div class="circle"></div>
+      </div><div class="circle-clipper right">
+        <div class="circle"></div>
+      </div>
+    </div>
+  </div>
+`
+
 // System Info
 const fetchSystemInfo = () => {
   fetch(`${BASE_URL}/ctxGetSystemInfo.php`)
@@ -166,6 +180,7 @@ const residentCardClickHandler = () => {
 
     $('#modal-header').text(residentName);
     $('#modal-rport').val(residentRport);
+    $('#modal-next').html('').text('Next').removeClass('disabled');
     $('.modal').modal('open');
   });
 }
@@ -205,7 +220,7 @@ const generateDisconnectModalHtml = () => {
     <form action="#">
       <p>
         <label>
-          <input name="modal-radio" type="radio" value="disconnect" checked />
+          <input name="modal-radio" type="radio" value="dc-provider" checked />
           <span>disconnect from current provider</span>
         </label>
       </p>
@@ -297,28 +312,70 @@ const fetchAvailableProviders = (rport) => {
     });
 }
 
-const connectProviderB = (provider, rport) => {
-  fetch(`${BASE_URL}/ctxConnectProvider_B.php?port=${rport}&provider=${provider.toUpperCase()}`)
+const displayConnectSuccessful = (data) => {
+  const currentActiveCard = $('.resident-tab.active').attr('card');
+  const html = `
+    <p>
+      Port ${data.rport} successfully connected to ${data.pname}!
+    </p>
+  `;
+
+  $('#modal-body').html(html);
+  $('#modal-next').html('').text('Next');
+  fetchResidentData(currentActiveCard);
+}
+
+const displayDisconnectSuccessful = (data) => {
+  const currentActiveCard = $('.resident-tab.active').attr('card');
+  const html = `
+    <p>
+      Port ${data.rport} successfully disconnected!
+    </p>
+  `;
+
+  $('#modal-body').html(html);
+  $('#modal-next').html('').text('Next');
+  fetchResidentData(currentActiveCard);
+}
+
+const disconnectProvider = (rport) => {
+  $('#modal-next').html(ModalSpinnerBlueSm).addClass('disabled');
+  fetch(`${BASE_URL}/ctxDisconnectProvider.php?port=${rport}`)
     .then(res => res.json())
     .then(json => {
       if (json.rslt === 'fail') {
         alert(json.reason);
       } else {
         const data = json.data[0];
-        console.log(data);
+        displayDisconnectSuccessful(data);
+      }
+    });
+}
+
+const connectProviderB = (provider, rport) => {
+  $('#modal-next').html(ModalSpinnerBlueSm).addClass('disabled');
+  fetch(`${BASE_URL}/ctxConnectProvider_B.php?port=${rport}&provider=${encodeURIComponent(provider)}`)
+    .then(res => res.json())
+    .then(json => {
+      if (json.rslt === 'fail') {
+        alert(json.reason);
+      } else {
+        const data = json.data[0];
+        displayConnectSuccessful(data);
       }
     });
 }
 
 const connectProviderC = (provider, rport) => {
-  fetch(`${BASE_URL}/ctxConnectProvider_C.php?port=${rport}&provider=${provider.toUpperCase()}`)
+  $('#modal-next').html(ModalSpinnerBlueSm).addClass('disabled');
+  fetch(`${BASE_URL}/ctxConnectProvider_C.php?port=${rport}&provider=${encodeURIComponent(provider)}`)
     .then(res => res.json())
     .then(json => {
       if (json.rslt === 'fail') {
         alert(json.reason);
       } else {
         const data = json.data[0];
-        console.log(data);
+        displayConnectSuccessful(data);
       }
     });
 }
@@ -332,6 +389,8 @@ const modalNextClickHandler = () => {
       fetchResidentInfo(rport);
     } else if (modalOption === 'disconnect') {
       generateDisconnectModalHtml();
+    } else if (modalOption === 'dc-provider') {
+      disconnectProvider(rport);
     } else if (modalOption === 'connect') {
       fetchAvailableProviders(rport);
     } else if (modalOption === 'Verizon') {
