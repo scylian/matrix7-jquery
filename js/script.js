@@ -180,7 +180,7 @@ const residentCardClickHandler = () => {
 
     $('#modal-header').text(residentName);
     $('#modal-rport').val(residentRport);
-    $('#modal-next').html('').text('Next').removeClass('disabled');
+    $('#modal-submit').html('').text('Submit').removeClass('disabled');
     $('.modal').modal('open');
   });
 }
@@ -282,12 +282,12 @@ const showResidentInfo = (data) => {
     `;
   }
 
-  $('#modal-next').html('').text('Next');
+  $('#modal-submit').html('').text('Submit');
   $('#modal-body').html(html);
 }
 
 const fetchResidentInfo = (rport) => {
-  $('#modal-next').html(ModalSpinnerBlueSm).addClass('disabled');
+  $('#modal-submit').html(ModalSpinnerBlueSm).addClass('disabled');
   fetch(`${BASE_URL}/ctxGetPortDetail.php?port=${rport}`)
     .then(res => res.json())
     .then(json => {
@@ -322,7 +322,7 @@ const displayConnectSuccessful = (data) => {
   `;
 
   $('#modal-body').html(html);
-  $('#modal-next').html('').text('Next');
+  $('#modal-submit').html('').text('Submit');
   fetchResidentData(currentActiveCard);
 }
 
@@ -335,12 +335,12 @@ const displayDisconnectSuccessful = (data) => {
   `;
 
   $('#modal-body').html(html);
-  $('#modal-next').html('').text('Next');
+  $('#modal-submit').html('').text('Submit');
   fetchResidentData(currentActiveCard);
 }
 
 const disconnectProvider = (rport) => {
-  $('#modal-next').html(ModalSpinnerBlueSm).addClass('disabled');
+  $('#modal-submit').html(ModalSpinnerBlueSm).addClass('disabled');
   fetch(`${BASE_URL}/ctxDisconnectProvider.php?port=${rport}`)
     .then(res => res.json())
     .then(json => {
@@ -354,7 +354,7 @@ const disconnectProvider = (rport) => {
 }
 
 const connectProviderB = (provider, rport) => {
-  $('#modal-next').html(ModalSpinnerBlueSm).addClass('disabled');
+  $('#modal-submit').html(ModalSpinnerBlueSm).addClass('disabled');
   fetch(`${BASE_URL}/ctxConnectProvider_B.php?port=${rport}&provider=${encodeURIComponent(provider)}`)
     .then(res => res.json())
     .then(json => {
@@ -368,7 +368,7 @@ const connectProviderB = (provider, rport) => {
 }
 
 const connectProviderC = (provider, rport) => {
-  $('#modal-next').html(ModalSpinnerBlueSm).addClass('disabled');
+  $('#modal-submit').html(ModalSpinnerBlueSm).addClass('disabled');
   fetch(`${BASE_URL}/ctxConnectProvider_C.php?port=${rport}&provider=${encodeURIComponent(provider)}`)
     .then(res => res.json())
     .then(json => {
@@ -382,7 +382,7 @@ const connectProviderC = (provider, rport) => {
 }
 
 const modalNextClickHandler = () => {
-  $('#modal-next').on('click', function() {
+  $('#modal-submit').on('click', function() {
     const modalOption = $('input[name="modal-radio"]:checked').val();
     const rport = $('#modal-rport').val();
 
