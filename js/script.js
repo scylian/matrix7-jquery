@@ -220,14 +220,14 @@ const generateDisconnectModalHtml = () => {
     <form action="#">
       <p>
         <label>
-          <input name="modal-radio" type="radio" value="dc-provider" checked />
-          <span>disconnect from current provider</span>
+          <input name="modal-radio" type="radio" value="none" checked/>
+          <span>none</span>
         </label>
       </p>
       <p>
         <label>
-          <input name="modal-radio" type="radio" value="none" />
-          <span>none</span>
+          <input name="modal-radio" type="radio" value="dc-provider" />
+          <span>disconnect from current provider</span>
         </label>
       </p>
     </form>
@@ -388,6 +388,8 @@ const modalNextClickHandler = () => {
 
     if (modalOption === 'view') {
       fetchResidentInfo(rport);
+    } else if (modalOption === 'none') {
+      $('.modal').modal('close');
     } else if (modalOption === 'disconnect') {
       generateDisconnectModalHtml();
     } else if (modalOption === 'dc-provider') {
