@@ -272,7 +272,6 @@ const generateConnectModalHtml = (data) => {
 }
 
 const showResidentInfo = (data) => {
-  const modalBody = $('#modal-body');
   let html = '';
 
   for (const [key, value] of Object.entries(data)) {
@@ -283,10 +282,12 @@ const showResidentInfo = (data) => {
     `;
   }
 
-  modalBody.html(html);
+  $('#modal-next').html('').text('Next');
+  $('#modal-body').html(html);
 }
 
 const fetchResidentInfo = (rport) => {
+  $('#modal-next').html(ModalSpinnerBlueSm).addClass('disabled');
   fetch(`${BASE_URL}/ctxGetPortDetail.php?port=${rport}`)
     .then(res => res.json())
     .then(json => {
