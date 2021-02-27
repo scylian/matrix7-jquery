@@ -1,4 +1,3 @@
-import { BASE_URL } from './utils/config.mjs';
 import { fetchSystemInfo, fetchSystemStatus } from './modules/System.mjs';
 import ClickHandlers from './modules/Handlers.mjs';
 

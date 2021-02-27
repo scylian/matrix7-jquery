@@ -82,7 +82,6 @@ export const providerCOptions = (providers) => {
   let html = '';
 
   providers.map(provider => {
-    console.log(provider);
     html += `
       <p>
         <label>
