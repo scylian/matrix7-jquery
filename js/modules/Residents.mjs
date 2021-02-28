@@ -20,15 +20,26 @@ export const generateResidentTabs = (size) => {
 }
 
 const showResidentInfo = (data) => {
-  let html = '';
-
-  for (const [key, value] of Object.entries(data)) {
-    html += `
-      <p>
-        ${key} : ${value}
-      </p>
-    `;
-  }
+  let html = `
+    <div class="container">
+      <p>Resident:</p>
+      <div class="row">
+        <div class="col">
+          <p>Status: ${data.rstat}</p>
+          <p>Port: ${data.rport}</p>
+          <p>Facility: ${data.rfac}</p>
+        </div>
+      </div>
+      <p>Current Service:</p>
+      <div class="row">
+        <div class="col">
+          <p>Provider: ${data.pname}</p>
+          <p>Port: ${data.pport}</p>
+          <p>Facility: ${data.pfac}</p>
+        </div>
+      </div>
+    </div>
+  `;
 
   $('#modal-submit').html('').text('Submit');
   $('#modal-body').html(html);

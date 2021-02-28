@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta charset="utf-8" />
+    <title>Matrix 7</title>
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- FONTS
+  -------------------------------------------------- -->
+    <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
+
+    <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="stylesheet" href="css/all.min.css" />
+    <link rel="stylesheet" href="css/materialize.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+
+    <!-- JS
+  -------------------------------------------------- -->
+    <script type="text/javascript" src="js/assets/jquery-3.5.1.min.js"></script>
+    <script type="text/javascript" src="js/assets/moment.min.js"></script>
+    <script
+      type="text/javascript"
+      src="js/assets/moment-timezone.min.js"
+    ></script>
+    <script type="text/javascript" src="js/assets/materialize.min.js"></script>
+
+    <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <!-- <link rel="icon" type="image/png" href="images/favicon-16.png"> -->
+  </head>
+  <body>
+    <!-- Navbar
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <nav class="blue darken-3 nav-extended">
+      <div class="nav-wrapper row">
+        <div class="col s12">
+          <a href="#" data-target="slide-out" class="sidenav-trigger"
+            ><i class="fas fa-bars"></i
+          ></a>
+          <ul class="left nav-titles">
+            <li id="location"></li>
+            <li id="sw-version"></li>
+            <li id="model"></li>
+          </ul>
+          <ul id="header-status" class="right"></ul>
+        </div>
+      </div>
+
+      <div class="nav-content">
+        <ul id="resident-tabs" class="tabs tabs-transparent"></ul>
+      </div>
+    </nav>
+
+    <!-- Sidenav
+  --------------------------------------------------- -->
+    <ul id="slide-out" class="sidenav">
+      <li><a href="index.html">DASHBOARD</a></li>
+      <li><a href="provisioning.html">PROVISIONING</a></li>
+      <li><a href="configuration.html">CONFIGURATION</a></li>
+      <li><a href="maintenance.html">MAINTENANCE</a></li>
+      <li><a href="admin.html">ADMIN</a></li>
+      <li><a href="reports.html">REPORTS</a></li>
+      <li><a href="hardware.html">HARDWARE</a></li>
+    </ul>
+
+    <!-- Primary Page Layout
+  -------------------------------------------------- -->
+    <div class="container">
+      <div class="row">
+        <div class="col s4">
+          <table class="responsive-table highlight">
+            <thead>
+              <tr>
+                <th colspan="2">FRONT CARDS</th>
+              </tr>
+              <tr>
+                <th>SLOT</th>
+                <th>STATUS</th>
+              </tr>
+            </thead>
+    
+            <tbody id="front-table-body"></tbody>
+          </table>
+        </div>
+
+        <div class="col s4">
+          <table class="responsive-table highlight">
+            <thead>
+              <tr>
+                <th colspan="2">REAR CARDS</th>
+              </tr>
+              <tr>
+                <th>SLOT</th>
+                <th>STATUS</th>
+              </tr>
+            </thead>
+    
+            <tbody id="rear-table-body"></tbody>
+          </table>
+        </div>
+
+        <div class="col s4">
+          <table class="responsive-table highlight">
+            <thead>
+              <tr>
+                <th>TEMPERATURE</th>
+                <th>VOLTAGE</th>
+              </tr>
+            </thead>
+
+            <tbody id="extra-table-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <script type="module" src="js/hardware.mjs"></script>
+  </body>
+</html>
