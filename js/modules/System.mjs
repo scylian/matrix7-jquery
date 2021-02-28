@@ -3,7 +3,7 @@ import { generateResidentTabs } from "./Residents.mjs";
 import { generateAlmBtn, generateStatusBtn } from './Templates.mjs';
 
 // System Info
-export const fetchSystemInfo = async () => {
+const fetchSystemInfo = async () => {
   const res = await ctxAPI("ctxGetSystemInfo");
 
   if (res.rslt === "fail") {
@@ -18,7 +18,7 @@ export const fetchSystemInfo = async () => {
 };
 
 // System Status
-export const fetchSystemStatus = async () => {
+const fetchSystemStatus = async () => {
   const res = await ctxAPI("ctxGetSystemStatus");
 
   if (res.rslt === 'fail') {
@@ -38,4 +38,10 @@ const updateSystemStatus = (data) => {
   `;
   
   $('#header-status').html(almHtml+statHtml+timeHtml);
+}
+
+export default () => {
+  fetchSystemInfo();
+  fetchSystemStatus();
+  setInterval(fetchSystemStatus, 60000);
 }

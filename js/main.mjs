@@ -1,11 +1,9 @@
-import { fetchSystemInfo, fetchSystemStatus } from './modules/System.mjs';
+import SystemStartup from './modules/System.mjs';
 import ClickHandlers from './modules/Handlers.mjs';
 
 $(document).ready(() => {
   $('.sidenav').sidenav();
-  fetchSystemInfo();
-  fetchSystemStatus();
-  setInterval(fetchSystemStatus, 60000);
+  SystemStartup();
   ClickHandlers();
   $('.modal').modal();
 });
