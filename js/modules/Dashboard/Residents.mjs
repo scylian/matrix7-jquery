@@ -1,5 +1,4 @@
 import { ctxAPI } from '../../utils/api.mjs';
-import { ModalSpinnerBlueSm } from '../../constants/Spinners.mjs';
 
 const generateResidentCards = (data) => {
   let html = '';
@@ -94,8 +93,6 @@ export const fetchResidentData = async (card) => {
 }
 
 export const fetchResidentInfo = async (rport) => {
-  $('#modal-submit').html(ModalSpinnerBlueSm).addClass('disabled');
-
   const queryObj = { port: rport };
   const res = await ctxAPI("ctxGetPortDetail", queryObj)
 

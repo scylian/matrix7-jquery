@@ -1,11 +1,14 @@
 import { fetchResidentData, fetchResidentInfo } from './Residents.mjs';
 import { generateModalHtml, generateDisconnectModalHtml } from './Modals.mjs';
 import { disconnectProvider, connectProviderB, connectProviderC, fetchAvailableProviders } from './Providers.mjs';
+import { ModalSpinnerBlueSm } from '../../constants/Spinners.mjs';
 
 const modalNextClickHandler = () => {
   $('#modal-submit').on('click', function() {
     const modalOption = $('input[name="modal-radio"]:checked').val();
     const rport = $('#modal-rport').val();
+
+    $('#modal-submit').html(ModalSpinnerBlueSm).addClass('disabled');
 
     if (modalOption === 'view') {
       fetchResidentInfo(rport);

@@ -1,11 +1,8 @@
 import { ctxAPI } from '../../utils/api.mjs';
 import { fetchResidentData } from './Residents.mjs';
 import { generateConnectModalHtml } from './Modals.mjs';
-import { ModalSpinnerBlueSm } from '../../constants/Spinners.mjs';
 
 export const disconnectProvider = async (rport) => {
-  $('#modal-submit').html(ModalSpinnerBlueSm).addClass('disabled');
-
   const queryObj = { port: rport };
   const res = await ctxAPI("ctxDisconnectProvider", queryObj);
 
@@ -17,8 +14,6 @@ export const disconnectProvider = async (rport) => {
 }
 
 export const connectProviderB = async (provider, rport) => {
-  $('#modal-submit').html(ModalSpinnerBlueSm).addClass('disabled');
-
   const queryObj = { port: rport, provider: encodeURIComponent(provider) };
   const res = await ctxAPI("ctxConnectProvider_B", queryObj);
   
@@ -30,8 +25,6 @@ export const connectProviderB = async (provider, rport) => {
 }
 
 export const connectProviderC = async (provider, rport) => {
-  $('#modal-submit').html(ModalSpinnerBlueSm).addClass('disabled');
-
   const queryObj = { port: rport, provider: encodeURIComponent(provider) };
   const res = await ctxAPI("ctxConnectProvider_C", queryObj);
 

@@ -20,6 +20,7 @@
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <link rel="stylesheet" href="css/all.min.css" />
     <link rel="stylesheet" href="css/materialize.min.css" />
+    <link rel="stylesheet" href="css/nouislider.min.css" />
     <link rel="stylesheet" href="css/style.css" />
 
     <!-- JS
@@ -31,6 +32,8 @@
       src="js/assets/moment-timezone.min.js"
     ></script>
     <script type="text/javascript" src="js/assets/materialize.min.js"></script>
+    <script type="text/javascript" src="js/assets/wNumb.js"></script>
+    <script type="text/javascript" src="js/assets/nouislider.min.js"></script>
 
     <!-- Favicon
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
@@ -105,16 +108,27 @@
           </table>
         </div>
 
-        <div class="col s4">
+        <div class="col s2">
           <table class="responsive-table highlight">
             <thead>
               <tr>
                 <th>TEMPERATURE</th>
+              </tr>
+            </thead>
+
+            <tbody id="temp-table-body"></tbody>
+          </table>
+        </div>
+
+        <div class="col s2">
+          <table class="responsive-table highlight">
+            <thead>
+              <tr>
                 <th>VOLTAGE</th>
               </tr>
             </thead>
 
-            <tbody id="extra-table-body"></tbody>
+            <tbody id="volt-table-body"></tbody>
           </table>
         </div>
       </div>

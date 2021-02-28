@@ -1,9 +1,11 @@
 import SystemStartup from '../System.mjs';
-import { getHardwareStatus } from './Hardware.mjs';
+import Hardware from './Hardware.mjs';
+import ClickHandlers from './Handlers.mjs';
 
-$(document).ready(() => {
+$(document).ready(async () => {
   $('.sidenav').sidenav();
-  SystemStartup();
-  getHardwareStatus();
+  await SystemStartup();
+  Hardware();
+  ClickHandlers();
   $('.modal').modal();
 });
