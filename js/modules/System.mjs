@@ -1,5 +1,4 @@
 import { ctxAPI } from "../utils/api.mjs";
-import { generateResidentTabs } from "./Residents.mjs";
 import { generateAlmBtn, generateStatusBtn } from './Templates.mjs';
 
 // System Info
@@ -13,7 +12,7 @@ const fetchSystemInfo = async () => {
     $("#location").text(data.location);
     $("#sw-version").text(data.sw_version);
     $("#model").text(data.model);
-    generateResidentTabs(data.size);
+    $('#ctx-size').val(data.size);
   }
 };
 
@@ -40,8 +39,8 @@ const updateSystemStatus = (data) => {
   $('#header-status').html(almHtml+statHtml+timeHtml);
 }
 
-export default () => {
-  fetchSystemInfo();
+export default async () => {
+  await fetchSystemInfo();
   fetchSystemStatus();
   setInterval(fetchSystemStatus, 60000);
 }

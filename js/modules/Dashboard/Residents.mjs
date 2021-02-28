@@ -1,9 +1,45 @@
-import { ctxAPI } from '../utils/api.mjs';
-import { generateResidentCards } from './Templates.mjs';
-import { ModalSpinnerBlueSm } from './Modals.mjs';
+import { ctxAPI } from '../../utils/api.mjs';
+import { ModalSpinnerBlueSm } from '../../constants/Spinners.mjs';
+
+const generateResidentCards = (data) => {
+  let html = '';
+
+  data.forEach(resident => {
+    let color = 'blue-grey darken-1';
+
+    switch(resident.rstat) {
+      case "CONN":
+        color = 'blue lighten-4';
+        break;
+      case "SF":
+        color = 'grey lighten-5';
+        break;
+      case "MAINT":
+        color = 'orange lighten-1';
+        break;
+      default:
+    }
+    
+    html += `
+      <div class="col m4 l3 xl2 black-text">
+        <div class="resident-card card ${color}">
+          <div class="card-content">
+            <span class="card-title">${resident.rname}</span>
+            <input class="resident-rport" value="${resident.rport}" style="display:none;" />
+            <p>Status: <span class="resident-rstat">${resident.rstat}</span></p>
+            <p>${resident.pname}</p>
+            <p>${resident.pname !== 'NO SERVICE' ? resident.svc : '-'}</p>
+          </div>
+        </div>
+      </div>
+    `
+
+    $('#resident-cards').html(html);
+  });
+}
 
 // Generate Resident Tabs
-export const generateResidentTabs = (size) => {
+const generateResidentTabs = (size) => {
   const count = size / 24;
   let html = '';
 
@@ -68,4 +104,9 @@ export const fetchResidentInfo = async (rport) => {
   } else {
     showResidentInfo(res.data[0]);
   }
+}
+
+export default () => {
+  const size = $('#ctx-size').val();
+  generateResidentTabs(size);
 }

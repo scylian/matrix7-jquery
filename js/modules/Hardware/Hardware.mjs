@@ -1,16 +1,14 @@
-import { ctxAPI } from '../utils/api.mjs';
+import { ctxAPI } from "../../utils/api.mjs";
 
 export const getHardwareStatus = async () => {
   const res = await ctxAPI("ctxGetHwStatus");
-  
-  if (res.rslt === 'fail') {
+
+  if (res.rslt === "fail") {
     alert(res.reason);
   } else {
-    console.log(res.data[0]);
     generateHardwareTable(res.data[0]);
   }
-}
-
+};
 const generateHardwareTable = (data) => {
   const frontBody = $('#front-table-body');
   const rearBody = $('#rear-table-body');
@@ -26,14 +24,14 @@ const generateHardwareTable = (data) => {
     if (key !== "TEMPERATURE" && key !== "VOLTAGE") {
       if (key.charAt(0) === 'F') {
         frontHtml += `
-          <tr>
+          <tr class="front card-row">
             <td>${key}</td>
             <td>${value}</td>
           </tr>
         `;
       } else if (key.charAt(0) === 'R') {
         rearHtml += `
-          <tr>
+          <tr class="rear card-row">
             <td>${key}</td>
             <td>${value}</td>
           </tr>

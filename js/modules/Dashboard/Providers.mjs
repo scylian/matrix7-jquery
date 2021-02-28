@@ -1,6 +1,7 @@
-import { ctxAPI } from '../utils/api.mjs';
+import { ctxAPI } from '../../utils/api.mjs';
 import { fetchResidentData } from './Residents.mjs';
-import { generateConnectModalHtml, ModalSpinnerBlueSm } from './Modals.mjs';
+import { generateConnectModalHtml } from './Modals.mjs';
+import { ModalSpinnerBlueSm } from '../../constants/Spinners.mjs';
 
 export const disconnectProvider = async (rport) => {
   $('#modal-submit').html(ModalSpinnerBlueSm).addClass('disabled');
