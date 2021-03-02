@@ -1,8 +1,8 @@
-import { hardwareSlotAction, hardwareTempVoltAction } from "./Hardware.mjs";
+import { hardwareSlotAction, hardwareTempVoltAction } from "./Hardware.js";
 import {
   generateCardActionModalHtml,
   generateTempVoltActionModalHtml,
-} from "./Modals.mjs";
+} from "./Modals.js";
 import { ModalSpinnerBlueSm } from "../../constants/Spinners.mjs";
 
 const tableRowClickHandler = () => {

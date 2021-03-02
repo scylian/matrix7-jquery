@@ -1,6 +1,6 @@
-import { ctxAPI } from '../../utils/api.mjs';
-import { fetchResidentData } from './Residents.mjs';
-import { generateConnectModalHtml } from './Modals.mjs';
+import { ctxAPI } from '../../utils/api.js';
+import { fetchResidentData } from './Residents.js';
+import { generateConnectModalHtml } from './Modals.js';
 
 export const disconnectProvider = async (rport) => {
   const queryObj = { port: rport };

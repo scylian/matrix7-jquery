@@ -1,7 +1,7 @@
-import { fetchResidentData, fetchResidentInfo } from './Residents.mjs';
-import { generateModalHtml, generateDisconnectModalHtml } from './Modals.mjs';
-import { disconnectProvider, connectProviderB, connectProviderC, fetchAvailableProviders } from './Providers.mjs';
-import { ModalSpinnerBlueSm } from '../../constants/Spinners.mjs';
+import { fetchResidentData, fetchResidentInfo } from './Residents.js';
+import { generateModalHtml, generateDisconnectModalHtml } from './Modals.js';
+import { disconnectProvider, connectProviderB, connectProviderC, fetchAvailableProviders } from './Providers.js';
+import { ModalSpinnerBlueSm } from '../../constants/Spinners.js';
 
 const modalNextClickHandler = () => {
   $('#modal-submit').on('click', function() {

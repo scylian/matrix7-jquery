@@ -1,4 +1,4 @@
-import { ctxAPI } from '../../utils/api.mjs';
+import { ctxAPI } from '../../utils/api.js';
 
 const generateResidentCards = (data) => {
   let html = '';

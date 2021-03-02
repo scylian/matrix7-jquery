@@ -1,6 +1,6 @@
-import SystemStartup from '../System.mjs';
-import Hardware from './Hardware.mjs';
-import ClickHandlers from './Handlers.mjs';
+import SystemStartup from '../System.js';
+import Hardware from './Hardware.js';
+import ClickHandlers from './Handlers.js';
 
 $(document).ready(async () => {
   $('.sidenav').sidenav();

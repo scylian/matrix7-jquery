@@ -1,4 +1,4 @@
-import { BASE_URL } from './config.mjs';
+import { BASE_URL } from './config.js';
 
 export const ctxAPI = async (endpoint, query={}) => {
   let queryStr = '?';

@@ -1,4 +1,4 @@
-import { providerCOptions } from './Providers.mjs';
+import { providerCOptions } from './Providers.js';
 
 export const generateModalHtml = (rstat) => {
   let connectText = '';

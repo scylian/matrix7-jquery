@@ -1,5 +1,5 @@
-import { ctxAPI } from "../utils/api.mjs";
-import { generateAlmBtn, generateStatusBtn } from './Templates.mjs';
+import { ctxAPI } from "../utils/api.js";
+import { generateAlmBtn, generateStatusBtn } from './Templates.js';
 
 // System Info
 const fetchSystemInfo = async () => {
