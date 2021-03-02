@@ -3,7 +3,7 @@ import {
   generateCardActionModalHtml,
   generateTempVoltActionModalHtml,
 } from "./Modals.js";
-import { ModalSpinnerBlueSm } from "../../constants/Spinners.mjs";
+import { ModalSpinnerBlueSm } from "../../constants/Spinners.js";
 
 const tableRowClickHandler = () => {
   $(document).on("click", ".card-row", function () {
